@@ -149,25 +149,45 @@ public  :
 };
 
 int main() {
-    int n ;
-    cin>>n;
-    Record rec(n);
-    rec.accept();
-    rec.display();
-    rec.heap_sort();
-    cout<<"Final"<<endl;
-    rec.display();
-    cout<<"Calling  the  Quick  Sort  for  phone  number "<<endl;
-    rec.quick_sort(0,n-1);
-    rec.display();
-    cout<<"Testing  the  Both  BInary  Serch "<<endl;
-    cout<<"ENter mobile  "<<endl;
-    int mobile;
-    cin>>mobile;
-    if(rec.binary_search_itr(mobile)) cout<<"Find out th e  Mobile  Numebr  whoo !"<<endl;
-    else  cout<<"OOPS  no  Rec  FOund"<<endl;
+    int n;
+    cout << "Enter number of records: ";
+    cin >> n;
 
-    cin>>mobile;
-    if(rec.binary_search_rec(mobile,0,n-1)) cout<<"Find out th e  Mobile  Numebr  whoo !"<<mobile<<endl;
-    else  cout<<"OOPS  no  Rec  FOund"<<endl;
+    Records rec(n);
+    int choice;
+    
+    do {
+        cout << "\n1. Accept Data\n2. Display Data\n3. Quick Sort (Descending MobileNo)\n";
+        cout << "4. Heap Sort (Ascending BillAmount)\n5. Search Mobile No\n6. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: rec.acceptData(); break;
+            case 2: rec.display(); break;
+            case 3: rec.quick_sort(0, n - 1); rec.display(); break;
+            case 4: rec.heap_sort(); rec.display(); break;
+            case 5: {
+                int mobile;
+                cout << "Enter Mobile No: ";
+                cin >> mobile;
+                if (rec.binary_search_itr(mobile))
+                    cout << "Record Found using Iterative Search!\n";
+                else
+                    cout << "Record Not Found!\n";
+
+                cout << "Enter Mobile No: ";
+                cin >> mobile;
+                if (rec.binary_search_rec(mobile, 0, n - 1))
+                    cout << "Record Found using Recursive Search!\n";
+                else
+                    cout << "Record Not Found!\n";
+                break;
+            }
+            case 6: cout << "Exiting...\n"; break;
+            default: cout << "Invalid choice!\n";
+        }
+    } while (choice != 6);
+
+    return 0;
 }
