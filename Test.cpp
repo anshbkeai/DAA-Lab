@@ -143,9 +143,12 @@ public  :
     bool  binary_search_rec(int mobile,int l ,  int h) {
         if(l>h) return false;
         int mid  = ((l+h) >> 1);
-        if(user_info[mid].mobile_no > mobile ) return binary_search_rec(mobile,l,mid-1);
-        else if(user_info[mid].mobile_no < mobile) return  binary_search_rec(mobile,mid+1,h);
-        else return  true;
+        if(user_info[mid].mobile_no > mobile ) {return binary_search_rec(mobile,l,mid-1);}
+        else if(user_info[mid].mobile_no < mobile) {return  binary_search_rec(mobile,mid+1,h);}
+        else {
+             user_info[mid].toString();
+                return  true;        
+        }
     }
 
     bool  binary_search_itr(int mobile_no ){
@@ -153,15 +156,24 @@ public  :
         int  h = n-1;
         while(l<=h) {
             int mid  = ((l+h) >> 1);
-            if(user_info[mid].mobile_no > mobile_no ) h = mid-1;
-            else if(user_info[mid].mobile_no < mobile_no) l= mid+1;
-            else return  true;
+            if(user_info[mid].mobile_no > mobile_no ) {h = mid-1;}
+            
+            else if(user_info[mid],mobile_no == mobile_no){
+                 user_info[mid].toString();
+                return  true;
+             }
+            else {
+                l=mid+1;    
+            }
         }
         return  false;
     } 
     bool linear_Search(int  mobile ) {
         for(int i  =0 ;i < n;i++) {
-            if(user_info[i].mobile_no == mobile) return  true;
+            if(user_info[i].mobile_no == mobile) {
+                user_info[i].toString();
+                return  true;
+            }
         }
         return  false;
     }
@@ -198,8 +210,8 @@ int main() {
                 int mobile;
                 cout << "Enter Mobile No: ";
                 cin >> mobile;
-                if (rec.binary_search_itr(mobile))
-                    cout << "Record Found using Iterative Search!\n";
+                if (rec.linear_Search(mobile))
+                    cout << "Record Found using Linear  Search!\n";
                 else
                     cout << "Record Not Found!\n";
 
@@ -207,6 +219,13 @@ int main() {
                 cin >> mobile;
                 if (rec.binary_search_rec(mobile, 0, n - 1))
                     cout << "Record Found using Recursive Search!\n";
+                else
+                    cout << "Record Not Found!\n";
+
+                cout << "Enter Mobile No: ";
+                cin >> mobile;
+                if (rec.binary_search_itr(mobile))
+                    cout << "Record Found using Iterative  Search!\n";
                 else
                     cout << "Record Not Found!\n";
                 break;
